@@ -1,5 +1,4 @@
 # Linear Regression
-
 Given a set of points, how can we draw a line that passes as close to these
 points as possible? First, we need to answer some important questions:
 - Do these points roughly look like they form a line?
@@ -8,7 +7,7 @@ points as possible? First, we need to answer some important questions:
 - How and why is this useful in the real world?
 - Why is this "machine learning"?
 
-## Predicting the Price of a House
+## Predicting the Price of a House 1
 Given a simple set of houses, where a 1-bedroom house would cost 150$, and each
 additional room would add $50 more, we can define the price of a house as:
 
@@ -31,5 +30,53 @@ the *bias* of the model.
   multiplied by a corresponding factor.
 - **Bias:** The bias is any constant that the formula corresponding to the model
   refers to, that is not intrinsically attached to any of the features.
+
+## Predicting the Price of a House 2
+So now, what if we had a more complicated dataset? We'll start with the same
+dataset as before, but add a small variance of +/- [0-10] to each value. Now,
+our equation becomes a little more complicated. It might look like this:
+
+$$
+Price = 100 + 50(Number of rooms) + (Small error)
+$$
+
+## Multivariate Linear Regression
+Okay, so our previous model predicted the price of a house based on a single
+feature, the number of rooms. But in reality, there are many _other_ factors
+that influence price, such as size, quality of schools, age of the house, etc...
+
+Actually, it's quite easy. Similar to how we had a weight multiplying a feature,
+we just add new ones for each feature! Thus, our new model might look like this:
+
+$$
+Price = 30(Number of rooms) + 1.5(Size) + 10(Quality of schools) - 2(Age of
+house) + 50
+$$
+
+> If you're wondering why we _subtract_ the "Age of house" feature, it's because
+> we expect the house to _drop_ as its age increases. In other words, they are
+> _negatively_ correlated, whereas all the other features are _positively_
+> correlated.
+
+## The Linear Regression Algorithm
+
+Given a dataset of points on a plane, we want to generate a line that passes
+close to the points.
+
+Geometrically speaking, we do this by:
+1. Pick a random line.
+2. Pick a random data point.
+3. Move the line a little closer to that point.
+4. Repeat steps 2-3 many, many, MANY times.
+5. Return our line.
+
+Mathematically speaking, this is equivalent to:
+1. Pick a model with random weights (for each feature) and a random bias.
+2. Pick a random data point.
+3. Slightly adjust the weights and bias to improve the prediction for that
+   particular data point.
+4. Repeat steps 2-3 many, many, MANY times.
+5. Return our model.
+
 
 
