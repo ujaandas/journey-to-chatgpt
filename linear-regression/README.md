@@ -59,7 +59,6 @@ $$
 > correlated.
 
 ## The Linear Regression Algorithm
-
 Given a dataset of points on a plane, we want to generate a line that passes
 close to the points.
 
@@ -78,5 +77,19 @@ Mathematically speaking, this is equivalent to:
 4. Repeat steps 2-3 many, many, MANY times.
 5. Return our model.
 
+So okay, sure. Not too bad. But all of that's a lot easier said than done. The
+hardest and least intuitive step is 3; moving the "line" closer to a point is
+easy on graph paper, but not as much on a computer.
 
+The naiive approach to move our line is as follows:
 
+Given a line with slope $m$, $y$-intercept $b$, and equation $\hat{p} = mr + b$,
+as well as coordinates $(r, p)$, such that we want a new line $\hat{p} = m'r +
+b$ that is _closer_ to that point.
+
+Given two, very small random numbers $n_1$ and $n_2$, we essentially want to add
+these numbers to the slope $m$ and $y$-intercept $b$, respectively. That is to
+say, if the point is "behind" the line, or right of the y-axis, we want to
+rotate the line counter-clockwise, and vice versa. Also, if the line is above
+the line, we translate it upwards, and vice versa. Essentially, we transform the
+line in very, very small increments to get closer to our point.
