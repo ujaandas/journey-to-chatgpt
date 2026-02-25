@@ -81,6 +81,8 @@ So okay, sure. Not too bad. But all of that's a lot easier said than done. The
 hardest and least intuitive step is 3; moving the "line" closer to a point is
 easy on graph paper, but not as much on a computer.
 
+### The Naiive Approach
+
 The naiive approach to move our line is as follows:
 
 Given a line with slope $m$, $y$-intercept $b$, and equation $\hat{p} = mr + b$,
@@ -88,8 +90,48 @@ as well as coordinates $(r, p)$, such that we want a new line $\hat{p} = m'r +
 b$ that is _closer_ to that point.
 
 Given two, very small random numbers $n_1$ and $n_2$, we essentially want to add
-these numbers to the slope $m$ and $y$-intercept $b$, respectively. That is to
-say, if the point is "behind" the line, or right of the y-axis, we want to
-rotate the line counter-clockwise, and vice versa. Also, if the line is above
-the line, we translate it upwards, and vice versa. Essentially, we transform the
-line in very, very small increments to get closer to our point.
+these numbers to the slope $m$ and $y$-intercept $b$, respectively. 
+
+We have four possible cases:
+
+- Case 1: If the point is above the line and to the right of the $y$-axis, we
+  rotate the line counter-clockwise and translate it upwards.
+- Case 2: If the point is above the line and to the left of the $y$-axis, we
+  rotate the line clockwise and translate it upwards.
+- Case 3: If the point is below the line and to the right of the $y$-axis, we
+  rotate the line clockwise and translate it downwards.
+- Case 4: If the point is below the line and to the left of the $y$-axis, we
+  rotate the line counter-clockwise and translate it downwards.
+
+
+### The Square Trick
+
+There is another way to do what we just did! For what it's worth, the above
+"naiive" approach is quite simple, there are only four conditions that were
+based on the position of the point relative to the line. However, the square
+trick can bring these four cases down to just one by finding values with correct
+signs to add to the slope and $y$-intercept to _always_ move the line closer to
+our point.
+
+Looking at the $y$-intercept, note that depending on if the point is above or
+below the line, we either add or subtract a small amount, respectively. Thus, if a
+point is above the line, $p-\hat{p}$ is positive, and vice versa. Therefore, if
+we add the difference $p-\hat{p}$ to the $y$-intercept, the line will _always_
+move towards the point. THis is because this value is positive when the point is
+above the line, and negative when below. However, we need to be careful to take
+small steps, and therefore introduce a new term, *learning rate*.
+
+**Learning Rate:** A very small number that we pick before training our model,
+and helps us make sure our model changes in very, very small amounts by
+training.
+
+Similar to the above, we can look at the slope. When the point is either above
+the line and right of the $y$-axis, OR below the line and left of the $y$-axis,
+we rotate the line counter-clockwise. Otherwise, we rotate it clockwise. If a
+point $(r, p)$ is right of the $y$-axis, then $r$ is positive. If it's to the
+left of the $y$-axis, then $r$ is negative. 
+
+Now consider the value of $r(p - \hat{p}$. This is positive when both $r$ and
+$p-\hat{p}$ are both positive or both negative, ie; it lines up perfectly with
+cases 1/4, or 2/3, respectively. Therefore, we, like before, just add 
+$r(p-\hat{p}$ times the learning rate, of course.
