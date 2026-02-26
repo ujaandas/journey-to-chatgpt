@@ -20,7 +20,7 @@ Matrix* makeMatrix(int n_rows, int n_cols) {
 }
 
 Matrix* copyMatrix(double* data, int n_rows, int n_cols) {
-  Matrix *matrix = mk_matrix(n_rows, n_cols);
+  Matrix *matrix = makeMatrix(n_rows, n_cols);
 
   for (int i = 0; i < n_rows; i++) {
     for (int j = 0; j < n_cols; j++) {
@@ -48,7 +48,7 @@ void testMatrix(){
     10, 11, 12
   };
 
-  Matrix* m = cp_matrix(a, 3, 3);
-  print_matrix(m);
+  Matrix* m = copyMatrix(a, 3, 3);
+  printMatrix(m);
 }
 
