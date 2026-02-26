@@ -132,15 +132,18 @@ and helps us make sure our model changes in very, very small amounts by
 training.
 
 Similar to the above, we can look at the slope. When the point is either above
-the line and right of the $y$-axis, OR below the line and left of the $y$-axis,
-we rotate the line counter-clockwise. Otherwise, we rotate it clockwise. If a
-point $(r, p)$ is right of the $y$-axis, then $r$ is positive. If it's to the
-left of the $y$-axis, then $r$ is negative. 
+the line AND right of the $y$-axis, OR below the line AND left of the $y$-axis,
+we want to rotate the line counter-clockwise. Otherwise, we rotate it clockwise.
+This is just cases 1/4 and 2/3, respectively.
 
-Now consider the value of $r(p - \hat{p}$. This is positive when both $r$ and
+> Remember, if a
+> point $(r, p)$ is right of the $y$-axis, then $r$ is positive. If it's to the
+> left of the $y$-axis, then $r$ is negative. 
+
+Now consider the value of $r(p - \hat{p}$). This is positive when both $r$ and
 $p-\hat{p}$ are both positive or both negative, ie; it lines up perfectly with
-cases 1/4, or 2/3, respectively. Therefore, we, like before, just add 
-$r(p-\hat{p}$ times the learning rate, of course.
+cases 1/4, or 2/3, respectively. Therefore, we can just add 
+$r(p-\hat{p})$ times the learning rate to our slope.
 
 ### The Absolute Trick
 Last one, I swear. THe absolute trick is a middle-ground between the naiive and
