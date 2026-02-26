@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./graph.h"
+#include "./linreg.h"
 
 Point* makePoints(double x[], int xLen, double y[], int yLen) {
   if (xLen != yLen) {
@@ -28,6 +29,30 @@ void drawGraph(Point points[], int pointLen){
 
   fprintf(gnuplot, "set terminal kittycairo\n");
   fprintf(gnuplot, "plot '-'\n");
+
+  for (int i = 0; i < pointLen; i++) {
+    fprintf(gnuplot, "%g %g\n", points[i].x, points[i].y);
+  }
+
+  fprintf(gnuplot, "e\n");
+  fflush(gnuplot);
+  pclose(gnuplot);
+}
+
+void drawLine(Point points[], int pointLen, Line line) {
+  FILE *gnuplot = popen("gnuplot", "w");
+
+  if (!gnuplot) {
+    printf("gnuplot not found!\n");
+    return;
+  }
+
+  fprintf(gnuplot, "set terminal kittycairo\n");
+
+  fprintf(gnuplot, "f(x) = %f*x + %f\n", line.m, line.c);
+
+  fprintf(gnuplot, "plot '-' with points title 'Data', "
+      "f(x) with lines title 'Regression'\n");
 
   for (int i = 0; i < pointLen; i++) {
     fprintf(gnuplot, "%g %g\n", points[i].x, points[i].y);

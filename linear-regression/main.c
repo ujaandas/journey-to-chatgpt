@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "./graph.h"
+#include "./linreg.h"
 
 int main() {
   // Possible number of rooms
@@ -10,7 +11,9 @@ int main() {
 
   Point* points = makePoints(features, 6, labels, 6);
 
-  drawGraph(points, 6);
+  Line naiiveLine = naiiveTrick(points, 6, 1000);
+
+  drawLine(points, 6, naiiveLine);
 
   return 0;
 }
