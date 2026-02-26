@@ -37,7 +37,7 @@ Line naiiveTrick(Point* pts, int numPts, int epochs, double learningRate) {
       // Translate line downards
       line.c -= learningRate;
     }
-    
+
     // Case 4: Point is below line and left of y-axis
     else if (chosenPoint.y < pred && chosenPoint.x < 0) {
       // Rotate line counter-clockwise
@@ -51,7 +51,7 @@ Line naiiveTrick(Point* pts, int numPts, int epochs, double learningRate) {
 }
 
 Line squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
- // Make a random line
+  // Make a random line
   Line line;
   line.m = 0;
   line.c = 0;
@@ -61,7 +61,7 @@ Line squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
     Point chosenPoint = pts[rand() % numPts];
 
     double pred = line.m * chosenPoint.x + line.c;
-    
+
     // Is our point above or below the line?
     // This 'theta' corresponds to p - p^
     double theta = chosenPoint.y - pred;
@@ -78,6 +78,33 @@ Line squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
     // line, AND left of the y-axis. This lines up with cases 1/4 and 2/3,
     // respectively.
     line.m += (chosenPoint.x * theta) * learningRate;
+  }
+
+  return line;
+}
+
+Line absoluteTrick(Point* pts, int numPts, int epochs, double learningRate) {
+  // Make a random line
+  Line line;
+  line.m = 0;
+  line.c = 0;
+
+  for (int i = 0; i < epochs; i++) {
+    // Select a random point
+    Point chosenPoint = pts[rand() % numPts];
+
+    double pred = line.m * chosenPoint.x + line.c;
+
+    // Positive if our point is above the line, and vice versa
+    double theta = chosenPoint.y - pred;
+
+    if (theta > 0) {
+      line.m += chosenPoint.x * learningRate;
+      line.c += learningRate;
+    } else {
+      line.m -= chosenPoint.x * learningRate;
+      line.c -= learningRate;
+    }
   }
 
   return line;
