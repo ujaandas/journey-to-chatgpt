@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 Matrix* makeMatrix(int n_rows, int n_cols) {
-  struct Matrix* m = malloc(sizeof(Matrix));
+  Matrix* m = malloc(sizeof(Matrix));
 
   m->rows = n_rows;
   m->cols = n_cols;
@@ -20,7 +20,7 @@ Matrix* makeMatrix(int n_rows, int n_cols) {
 }
 
 Matrix* copyMatrix(double* data, int n_rows, int n_cols) {
-  struct Matrix *matrix = mk_matrix(n_rows, n_cols);
+  Matrix *matrix = mk_matrix(n_rows, n_cols);
 
   for (int i = 0; i < n_rows; i++) {
     for (int j = 0; j < n_cols; j++) {
