@@ -82,12 +82,19 @@ hardest and least intuitive step is 3; moving the "line" closer to a point is
 easy on graph paper, but not as much on a computer.
 
 ### The Naiive Approach
-
 The naiive approach to move our line is as follows:
 
 Given a line with slope $m$, $y$-intercept $b$, and equation $\hat{p} = mr + b$,
 as well as coordinates $(r, p)$, such that we want a new line $\hat{p} = m'r +
 b$ that is _closer_ to that point.
+
+> For clarity:
+> - $m$ is the gradient
+> - $m'$ is the _new_ gradient of our _new_ line
+> - $r$ is the number of rooms
+> - $p$ is the price of the house
+> - We plot $(r,p)$, so the feature vs label
+> - $\hat{p}$ is our _predicted_ price of the house
 
 Given two, very small random numbers $n_1$ and $n_2$, we essentially want to add
 these numbers to the slope $m$ and $y$-intercept $b$, respectively. 
@@ -105,7 +112,6 @@ We have four possible cases:
 
 
 ### The Square Trick
-
 There is another way to do what we just did! For what it's worth, the above
 "naiive" approach is quite simple, there are only four conditions that were
 based on the position of the point relative to the line. However, the square
@@ -113,11 +119,11 @@ trick can bring these four cases down to just one by finding values with correct
 signs to add to the slope and $y$-intercept to _always_ move the line closer to
 our point.
 
-Looking at the $y$-intercept, note that depending on if the point is above or
+Looking at the $y$-intercept, depending on if the point is above or
 below the line, we either add or subtract a small amount, respectively. Thus, if a
 point is above the line, $p-\hat{p}$ is positive, and vice versa. Therefore, if
 we add the difference $p-\hat{p}$ to the $y$-intercept, the line will _always_
-move towards the point. THis is because this value is positive when the point is
+move towards the point. This is because this value is positive when the point is
 above the line, and negative when below. However, we need to be careful to take
 small steps, and therefore introduce a new term, *learning rate*.
 
@@ -135,3 +141,30 @@ Now consider the value of $r(p - \hat{p}$. This is positive when both $r$ and
 $p-\hat{p}$ are both positive or both negative, ie; it lines up perfectly with
 cases 1/4, or 2/3, respectively. Therefore, we, like before, just add 
 $r(p-\hat{p}$ times the learning rate, of course.
+
+### The Absolute Trick
+Last one, I swear. THe absolute trick is a middle-ground between the naiive and
+square tricks. It's also quite clever, so a bit simpler. In the square trick, we
+used two quantities, $p-\hat{p}$ and $r$ to bring four cases down to two. With
+the absolute trick, we can use just one quantity, $r$, to do the same.
+
+If the point is above the line, ie; $p > \hat{p}$, add $nr$ to the slope $m$,
+which rotates the line counter-clockwise is the point is in-front of the $y$-axis,
+and clockwise if the line is behind it. Also, add $n$ to the $y$-intercept $b$
+to translate the line up. Both these actions move the line closer to our point.
+Naturally, the same goes for the other way around, just vice versa.
+
+## Implementing Linear Regression
+Now, at long last, we are ready to implement linear regression. Given a dataset
+of houses with number of rooms and prices, we want *model weights* - price per
+room and base price.
+
+1. Start with random values for the slope and $y$-intercept.
+2. Pick a random data point.
+3. Update the slope and $y$-intercept using our tricks.
+4. Repeat 2-3 many, many, many times.
+
+> Each iteration of steps 2-3 is called an _epoch_, a number we set at the
+> beginning of our algorithm.
+
+
