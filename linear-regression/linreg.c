@@ -2,9 +2,9 @@
 #include "./graph.h"
 #include "./linreg.h"
 
-Line naiiveTrick(Point* pts, int numPts, int epochs, double learningRate) {
+SimpleLine naiiveTrick(Point* pts, int numPts, int epochs, double learningRate) {
   // Make a random line
-  Line line;
+  SimpleLine line;
   line.m = 0;
   line.c = 0;
 
@@ -50,9 +50,9 @@ Line naiiveTrick(Point* pts, int numPts, int epochs, double learningRate) {
   return line;
 }
 
-Line squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
+SimpleLine squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
   // Make a random line
-  Line line;
+  SimpleLine line;
   line.m = 0;
   line.c = 0;
 
@@ -83,9 +83,9 @@ Line squareTrick(Point* pts, int numPts, int epochs, double learningRate) {
   return line;
 }
 
-Line absoluteTrick(Point* pts, int numPts, int epochs, double learningRate) {
+SimpleLine absoluteTrick(Point* pts, int numPts, int epochs, double learningRate) {
   // Make a random line
-  Line line;
+  SimpleLine line;
   line.m = 0;
   line.c = 0;
 

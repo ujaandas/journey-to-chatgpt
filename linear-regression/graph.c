@@ -20,7 +20,16 @@ Point* makePoints(double x[], int xLen, double y[], int yLen) {
   return pts;
 }
 
-void drawGraph(Point points[], int pointLen){
+PointSet* makePointSet(Point* points, int len) {
+  PointSet *ps = malloc(sizeof(PointSet));
+
+  ps->points = points;
+  ps->len = len;
+
+  return ps;
+}
+
+void drawGraph(PointSet* ps) {
   FILE *gnuplot = popen("gnuplot", "w");
 
   if (!gnuplot){
@@ -30,8 +39,8 @@ void drawGraph(Point points[], int pointLen){
   fprintf(gnuplot, "set terminal kittycairo\n");
   fprintf(gnuplot, "plot '-'\n");
 
-  for (int i = 0; i < pointLen; i++) {
-    fprintf(gnuplot, "%g %g\n", points[i].x, points[i].y);
+  for (int i = 0; i < ps->len; i++) {
+    fprintf(gnuplot, "%g %g\n", ps->points[i].x, ps->points[i].y);
   }
 
   fprintf(gnuplot, "e\n");
@@ -39,7 +48,11 @@ void drawGraph(Point points[], int pointLen){
   pclose(gnuplot);
 }
 
-void drawLine(Point points[], int pointLen, Line line) {
+void drawGraphComplex(PointSet** ps, int len) {
+
+}
+
+void drawSimpleLine(PointSet* ps, Line line) {
   FILE *gnuplot = popen("gnuplot", "w");
 
   if (!gnuplot) {
@@ -54,8 +67,8 @@ void drawLine(Point points[], int pointLen, Line line) {
   fprintf(gnuplot, "plot '-' with points title 'Data', "
       "f(x) with lines title 'Regression'\n");
 
-  for (int i = 0; i < pointLen; i++) {
-    fprintf(gnuplot, "%g %g\n", points[i].x, points[i].y);
+  for (int i = 0; i < ps->len; i++) {
+    fprintf(gnuplot, "%g %g\n", ps->points[i].x, ps->points[i].y);
   }
 
   fprintf(gnuplot, "e\n");

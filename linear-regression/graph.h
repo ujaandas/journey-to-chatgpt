@@ -1,17 +1,28 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-typedef struct Line Line;
+typedef struct SimpleLine SimpleLine;
+
+typedef struct MVLine MVLine;
 
 typedef struct Point {
   double x;
   double y;
 } Point;
 
+typedef struct PointSet {
+  Point* points;
+  int len;
+} PointSet;
+
 Point* makePoints(double x[], int xLen, double y[], int yLen);
 
-void drawGraph(Point points[], int pointLen);
+PointSet* makePointSet(Point* points, int len);
 
-void drawLine(Point points[], int pointLen, Line line);
+void drawGraph(PointSet* ps);
+
+void drawSimpleLine(PointSet* ps, SimpleLine line);
+
+void drawMVLine(PointSet** ps, int len, MVLine line);
 
 #endif // GRAPH_H
