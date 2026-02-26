@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Matrix* mk_matrix(int n_rows, int n_cols) {
+Matrix* makeMatrix(int n_rows, int n_cols) {
   struct Matrix* m = malloc(sizeof(Matrix));
 
   m->rows = n_rows;
@@ -19,7 +19,7 @@ Matrix* mk_matrix(int n_rows, int n_cols) {
   return m;
 }
 
-Matrix* cp_matrix(double* data, int n_rows, int n_cols) {
+Matrix* copyMatrix(double* data, int n_rows, int n_cols) {
   struct Matrix *matrix = mk_matrix(n_rows, n_cols);
 
   for (int i = 0; i < n_rows; i++) {
@@ -31,7 +31,7 @@ Matrix* cp_matrix(double* data, int n_rows, int n_cols) {
   return matrix;
 }
 
-void print_matrix(Matrix* m) {
+void printMatrix(Matrix* m) {
   for (int i = 0; i < m->rows; i++) {
     printf("\n");
     for (int j = 0; j < m->cols; j++) {
@@ -40,7 +40,7 @@ void print_matrix(Matrix* m) {
   }
 }
 
-void test_matrix(){
+void testMatrix(){
   double a[] = {
     1, 2, 3,
     4, 5, 6,
@@ -52,7 +52,3 @@ void test_matrix(){
   print_matrix(m);
 }
 
-int main() {
-  test_matrix();
-  return 0;
-}

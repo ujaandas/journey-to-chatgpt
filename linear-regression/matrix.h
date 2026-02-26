@@ -7,12 +7,12 @@ typedef struct Matrix {
   double** data;
 } Matrix;
 
-Matrix* mk_matrix(int n_rows, int n_cols);
+Matrix* makeMatrix(int n_rows, int n_cols);
 
-Matrix* cp_matrix(double* data, int n_rows, int n_cols);
+Matrix* copyMatrix(double* data, int n_rows, int n_cols);
 
-void print_matrix(Matrix* m);
+void printMatrix(Matrix* m);
 
-void test_matrix();
+void testMatrix();
 
 #endif // MATRIX_H
