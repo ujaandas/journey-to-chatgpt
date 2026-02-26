@@ -11,9 +11,11 @@ int main() {
 
   Point* points = makePoints(features, 6, labels, 6);
 
-  Line naiiveLine = naiiveTrick(points, 6, 1000);
+  // Line naiiveLine = naiiveTrick(points, 6, 1000);
+  Line squareLine = squareTrick(points, 6, 1000, 0.001);
 
-  drawLine(points, 6, naiiveLine);
+  // drawLine(points, 6, naiiveLine);
+  drawLine(points, 6, squareLine);
 
   return 0;
 }

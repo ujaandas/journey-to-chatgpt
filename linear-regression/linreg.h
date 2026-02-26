@@ -9,6 +9,10 @@ typedef struct Line {
   double c;
 } Line;
 
-Line naiiveTrick(Point* pts, int numPts, int epochs);
+Line naiiveTrick(Point* pts, int numPts, int epochs, double learningRate);
+
+Line squareTrick(Point* pts, int numPts, int epochs, double learningRate);
+
+Line absoluteTrick(Point* pts, int numPts, int epochs, double learningRate);
 
 #endif // LINREG_H
